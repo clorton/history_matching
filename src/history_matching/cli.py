@@ -6,11 +6,11 @@ Why does this file exist, and why not put this in __main__?
   You might be tempted to import things from __main__ later, but that will cause
   problems: the code will get executed twice:
 
-  - When you run `python -mhm_cc_pylibrary` python will execute
+  - When you run `python -mhistory_matching` python will execute
     ``__main__.py`` as a script. That means there won't be any
-    ``hm_cc_pylibrary.__main__`` in ``sys.modules``.
+    ``history_matching.__main__`` in ``sys.modules``.
   - When you import __main__ it will get executed again (as a module) because
-    there's no ``hm_cc_pylibrary.__main__`` in ``sys.modules``.
+    there's no ``history_matching.__main__`` in ``sys.modules``.
 
   Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
 """

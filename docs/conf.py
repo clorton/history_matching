@@ -22,7 +22,7 @@ copyright = '{0}, {1}'.format(year, author)
 try:
     from pkg_resources import get_distribution
 
-    version = release = get_distribution('hm_cc_pylibrary').version
+    version = release = get_distribution('history_matching').version
 except Exception:
     traceback.print_exc()
     version = release = '0.0.0'

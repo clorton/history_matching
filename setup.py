@@ -18,10 +18,10 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='hm-cc-pylibrary',
+    name='history-matching',
     use_scm_version={
         'local_scheme': 'dirty-tag',
-        'write_to': 'src/hm_cc_pylibrary/_version.py',
+        'write_to': 'src/history_matching/_version.py',
         'fallback_version': '0.0.0',
     },
     license='MIT',
@@ -74,6 +74,13 @@ setup(
     python_requires='>=3.7',
     install_requires=[
         # eg: 'aspectlib==1.1.1', 'six>=1.7',
+        "numpy",
+        "pandas",
+        "matplotlib",
+        "scikit-learn",
+        "asdf",
+        "pyarrow",
+        "tables"
     ],
     extras_require={
         # eg:
@@ -86,7 +93,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'hm-cc-pylibrary = hm_cc_pylibrary.cli:main',
+            'history-matching = history_matching.cli:main',
         ]
     },
 )

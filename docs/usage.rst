@@ -4,4 +4,4 @@ Usage
 
 To use History Matching in a project::
 
-	import hm_cc_pylibrary
+	import history_matching
