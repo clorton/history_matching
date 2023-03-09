@@ -1,5 +1,5 @@
 history_matching
-===============
+================
 
 .. testsetup::
 

@@ -26,12 +26,32 @@ def mean_and_variance_for_observations(observations: Dict[str, Union[List, np.nd
 
 def features_from_observations(observations: pd.DataFrame) -> List[str]:
 
+    """
+    Return a list of features from a Pandas DataFrame of observations.
+    
+    Args:
+        observations: Pandas DataFrame of observations
+        
+    Returns:
+        List of features
+    """
+
     features = list(observations.features)
 
     return features
 
 
 def dataframe_to_ndarray(df: pd.DataFrame) -> np.ndarray:
+
+    """
+    Convert a Pandas DataFrame to a NumPy ndarray.
+
+    Args:
+        df: Pandas DataFrame
+
+    Returns:
+        NumPy ndarray
+    """
 
     if df is not None:
         buffer = BytesIO()

@@ -20,6 +20,18 @@ logger = logging.getLogger()
 # https://en.wikipedia.org/wiki/Michael_Sorrentino
 class Situation:
 
+    """
+    The current state of the history matching process.
+
+    Attributes:
+        iteration: the current iteration number
+        parameter_space: a DataFrame containing the parameter space
+        sample_points: a DataFrame containing the sample points
+        simulator_results: a DataFrame containing the results of the simulator runs
+        observations: a DataFrame containing the observations
+        emulator_bank: a dictionary of emulators, keyed by feature name
+    """
+
     def __init__(
         self,
         parameter_space: pd.DataFrame,
@@ -47,6 +59,55 @@ class Situation:
 
     def validate(self) -> None:
 
+        """
+        Validate the Situation object.
+
+        Raises:
+            TypeError: if the iteration is not numeric
+            ValueError: if the iteration is not an integer
+            ValueError: if the iteration is negative
+            TypeError: if the parameter space is not a DataFrame
+            ValueError: if the parameter space is empty
+            ValueError: if the parameter space has duplicate parameter names
+            ValueError: if the parameter space has a parameter with a single value
+            ValueError: if the parameter space has a parameter with a negative value
+            ValueError: if the parameter space has a parameter with a zero value
+            ValueError: if the parameter space has a parameter with a non-numeric value
+            TypeError: if the sample points is not a DataFrame
+            ValueError: if the sample points is empty
+            ValueError: if the sample points has duplicate parameter names
+            ValueError: if the sample points has a parameter with a single value
+            ValueError: if the sample points has a parameter with a negative value
+            ValueError: if the sample points has a parameter with a zero value
+            ValueError: if the sample points has a parameter with a non-numeric value
+            ValueError: if the sample points has a parameter with a value outside the parameter space
+            TypeError: if the observations is not a DataFrame
+            ValueError: if the observations is empty
+            ValueError: if the observations has duplicate feature names
+            ValueError: if the observations has a feature with a single value
+            ValueError: if the observations has a feature with a negative value
+            ValueError: if the observations has a feature with a zero value
+            ValueError: if the observations has a feature with a non-numeric value
+            TypeError: if the simulator results is not a DataFrame
+            ValueError: if the simulator results is empty
+            ValueError: if the simulator results has duplicate parameter names
+            ValueError: if the simulator results has a parameter with a single value
+            ValueError: if the simulator results has a parameter with a negative value
+            ValueError: if the simulator results has a parameter with a zero value
+            ValueError: if the simulator results has a parameter with a non-numeric value
+            ValueError: if the simulator results has a parameter with a value outside the parameter space
+            ValueError: if the simulator results has a feature with a single value
+            ValueError: if the simulator results has a feature with a negative value
+            ValueError: if the simulator results has a feature with a zero value
+            ValueError: if the simulator results has a feature with a non-numeric value
+            TypeError: if the emulator bank is not a dictionary
+            ValueError: if the emulator bank is empty
+            ValueError: if the emulator bank has a feature with a single value
+            ValueError: if the emulator bank has a feature with a negative value
+            ValueError: if the emulator bank has a feature with a zero value
+            ValueError: if the emulator bank has a feature with a non-numeric value
+        """
+
         Situation.validate_iteration(self.iteration)
         Situation.validate_parameter_space(self.parameter_space)
         Situation.validate_sample_points(self.sample_points, self.parameter_space)
@@ -60,6 +121,18 @@ class Situation:
 
     @staticmethod
     def validate_iteration(iteration: int) -> None:
+
+        """
+        Validate the iteration.
+
+        Args:
+            iteration: the iteration number
+
+        Raises:
+            TypeError: if the iteration is not numeric
+            ValueError: if the iteration is not an integer
+            ValueError: if the iteration is negative
+        """
 
         if not isinstance(iteration, (int, float, np.number)):
             raise TypeError(
@@ -76,6 +149,22 @@ class Situation:
 
     @staticmethod
     def validate_parameter_space(parameter_space: pd.DataFrame) -> None:
+
+        """
+        Validate the parameter space.
+
+        Args:
+            parameter_space: the parameter space
+
+        Raises:
+            TypeError: if the parameter space is not a DataFrame
+            ValueError: if the parameter space is empty
+            ValueError: if the parameter space has duplicate parameter names
+            ValueError: if the parameter space has a parameter with a single value
+            ValueError: if the parameter space has a parameter with a negative value
+            ValueError: if the parameter space has a parameter with a zero value
+            ValueError: if the parameter space has a parameter with a non-numeric value
+        """
 
         if not isinstance(parameter_space, pd.DataFrame):
             raise TypeError(
@@ -109,6 +198,24 @@ class Situation:
     def validate_sample_points(
         sample_points: pd.DataFrame, parameter_space: pd.DataFrame
     ) -> None:
+        
+        """
+        Validate the sample points.
+
+        Args:
+            sample_points: the sample points
+            parameter_space: the parameter space
+
+        Raises:
+            TypeError: if the sample points is not a DataFrame
+            ValueError: if the sample points is empty
+            ValueError: if the sample points has duplicate parameter names
+            ValueError: if the sample points has a parameter with a single value
+            ValueError: if the sample points has a parameter with a negative value
+            ValueError: if the sample points has a parameter with a zero value
+            ValueError: if the sample points has a parameter with a non-numeric value
+            ValueError: if the sample points has a parameter with a value outside the parameter space
+        """
 
         if not isinstance(sample_points, pd.DataFrame):
             raise TypeError(
@@ -142,6 +249,22 @@ class Situation:
     @staticmethod
     def validate_observations(observations: pd.DataFrame) -> None:
 
+        """
+        Validate the observations.
+
+        Args:
+            observations: the observations
+
+        Raises:
+            TypeError: if the observations is not a DataFrame
+            ValueError: if the observations is empty
+            ValueError: if the observations has duplicate feature names
+            ValueError: if the observations has a feature with a single value
+            ValueError: if the observations has a feature with a negative value
+            ValueError: if the observations has a feature with a zero value
+            ValueError: if the observations has a feature with a non-numeric value
+        """
+
         if not isinstance(observations, pd.DataFrame):
             raise TypeError(
                 f"Situation observations should be Pandas DataFrame, not '{type(observations)}'"
@@ -161,6 +284,25 @@ class Situation:
         parameter_space: pd.DataFrame,
         observations: pd.DataFrame,
     ) -> None:
+        
+        """
+        Validate the simulator results.
+
+        Args:
+            simulator_results: the simulator results
+            parameter_space: the parameter space
+            observations: the observations
+
+        Raises:
+            TypeError: if the simulator results is not a DataFrame
+            ValueError: if the simulator results is empty
+            ValueError: if the simulator results has duplicate parameter names
+            ValueError: if the simulator results has a parameter with a single value
+            ValueError: if the simulator results has a parameter with a negative value
+            ValueError: if the simulator results has a parameter with a zero value
+            ValueError: if the simulator results has a parameter with a non-numeric value
+            ValueError: if the simulator results has a parameter with a value outside the parameter space
+        """
 
         if not isinstance(simulator_results, pd.DataFrame):
             raise TypeError(
@@ -183,6 +325,22 @@ class Situation:
     def validate_emulator_bank(
         emulator_bank: Dict[int, Dict[str, BaseEmulator]], observations: pd.DataFrame
     ) -> None:
+        
+        """
+        Validate the emulator bank.
+
+        Args:
+            emulator_bank: the emulator bank
+            observations: the observations
+
+        Raises:
+            TypeError: if the emulator bank is not a dictionary
+            TypeError: if the emulator bank keys are not integers
+            TypeError: if the emulator bank values are not dictionaries
+            ValueError: if the emulator bank keys are not >= 0
+            ValueError: if the emulator bank values are not emulators
+            ValueError: if the emulator bank does not have an emulator for each observation
+        """
 
         # emulator_bank must be a **dictionary** mapping int:dict
         if not isinstance(emulator_bank, dict):
@@ -224,6 +382,19 @@ class Situation:
 
     def save(self, filename: Path) -> None:
 
+        """
+        Save the situation to a file.
+
+        Args:
+            filename: the filename to save to
+
+        Raises:
+            Exception: if the situation is not valid
+
+        Returns:
+            None
+        """
+
         try:
             self.validate()
         except Exception as ex:
@@ -247,6 +418,20 @@ class Situation:
     @staticmethod
     # class Situation hasn't finished parsing yet, use string version for typing
     def read(filename: Path) -> "Situation":
+
+        """
+        Read a situation from a file.
+
+        Args:
+            filename: the filename to read from
+
+        Raises:
+            Exception: if the situation is not valid
+
+        Returns:
+            Situation object initialized from data in the file
+        
+        """
 
         af = asdf.open(filename)
         situation = Situation(

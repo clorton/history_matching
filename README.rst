@@ -43,7 +43,7 @@ Installation
 
 ::
 
-On macOS need homebrew, brew install hdf5 c-blosc lzo bzip2, HDF5_DIR=/opt/homebrew/opt/hdf5, export HDF5_DIR
+    On macOS need homebrew, brew install hdf5 c-blosc lzo bzip2, HDF5_DIR=/opt/homebrew/opt/hdf5, export HDF5_DIR
 
     pip install history-matching
 

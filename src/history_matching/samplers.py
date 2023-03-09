@@ -11,6 +11,17 @@ import pandas as pd
 
 def lhs(parameter_space: pd.DataFrame, n_samples: int = 8) -> pd.DataFrame:
 
+    """
+    Generate a Latin hypercube sample of points in parameter space.
+
+    Args:
+        parameter_space: a DataFrame with columns 'parameter', 'minimum', and 'maximum'
+        n_samples: number of samples
+
+    Returns:
+        a DataFrame with one row per sample, and one column per parameter
+    """
+
     # TODO - consider delegating to pyDOE lhs() and its options
     samples = pd.DataFrame()
 
@@ -31,6 +42,17 @@ def grid(
     parameter_space: pd.DataFrame, samples_per_dimension: int = 16
 ) -> pd.DataFrame:
 
+    """
+    Generate a grid of samples in parameter space.
+
+    Args:
+        parameter_space: a DataFrame with columns 'parameter', 'minimum', and 'maximum'
+        samples_per_dimension: number of samples per dimension
+
+    Returns:
+        a DataFrame with one row per sample, and one column per parameter
+    """
+
     values = []
     for entry in parameter_space.itertuples():
         edges = np.linspace(entry.minimum, entry.maximum, samples_per_dimension + 1)
@@ -43,6 +65,17 @@ def grid(
 
 
 def random(parameter_space: pd.DataFrame, n_samples: int = 16) -> pd.DataFrame:
+    
+    """
+    Generate a random sample of points in parameter space.
+
+    Args:
+        parameter_space: a DataFrame with columns 'parameter', 'minimum', and 'maximum'
+        n_samples: number of samples
+
+    Returns:
+        a DataFrame with one row per sample, and one column per parameter
+    """
 
     samples = pd.DataFrame()
 

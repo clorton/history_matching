@@ -13,6 +13,20 @@ logger = logging.getLogger()
 
 class Recipe:
 
+    """
+    Recipe for a history matching process.
+
+    Attributes:
+        start_step_callback: callback function to be called at the start of each step
+        run_simulators: function to run simulators
+        select_features: function to select features
+        generate_emulators: function to generate emulators
+        generate_emulator_for_feature: function to generate an emulator for a single feature
+        generate_next_sample_points: function to generate next sample points
+        end_step_callback: callback function to be called at the end of each step
+        exit_predicate: function to determine if the history matching process should exit
+    """
+
     def __init__(self):
         self.start_step_callback = Recipe.pirates                                   # Situation
         self.run_simulators = Recipe.null_simulator                                 # iteration, test points, config
@@ -152,6 +166,19 @@ class Recipe:
         emulator_bank: Dict[int, Dict[str, BaseEmulator]],
         config: Config,
     ) -> Tuple[pd.DataFrame, float]:
+        
+        """
+        Args:
+            iteration: current iteration index (0 based)
+            parameter_space: dataframe of parameter names in columns, each row represents a point in parameter space
+            observations: dataframe with feature names in columns, and one row of target values
+            emulator_bank: dictionary of emulators for each feature
+            config: history matching configuration
+
+        Returns:
+            pd.DataFrame: dataframe of parameter names in columns, each row represents a test point in parameter space
+            float: fraction of test points that are non-implausible
+        """
 
         logger.info("Generating next set of test points in parameter space...")
 
@@ -159,6 +186,16 @@ class Recipe:
 
     @staticmethod
     def standard_exit_predicate(iteration, non_implausible_fraction, config):
+
+        """
+        Args:
+            iteration: current iteration index (0 based)
+            non_implausible_fraction: fraction of test points that are non-implausible
+            config: history matching configuration
+
+        Returns:
+            bool: True if the history matching process should continue, False otherwise
+        """
 
         done = (iteration >= config.max_iterations) or (non_implausible_fraction <= config.non_implausible_target)
 

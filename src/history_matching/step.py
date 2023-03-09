@@ -26,7 +26,19 @@ from .config import Config
 logger = logging.getLogger()
 
 
-def do_step(situation: Situation, recipe: Recipe, config: Config):
+def do_step(situation: Situation, recipe: Recipe, config: Config) -> bool:
+
+    """
+    Perform one step of history matching.
+
+    Args:
+        situation: the current state of the history matching process
+        recipe: the recipe for this history matching process
+        config: the configuration for this history matching process
+
+    Returns:
+        True if the history matching process should continue, False otherwise
+    """
 
     logger.info(f"Starting step {situation.iteration}...")
 
@@ -127,6 +139,18 @@ def update_test_points(
 
 
 def do_staircase(situation: Situation, recipe: Recipe, config: Config) -> None:
+
+    """
+    Run multiple steps of the history matching process until do_step() returns false.
+
+    Args:
+        situation: the current state of the history matching process
+        recipe: the recipe for this history matching process
+        config: the configuration for this history matching process
+
+    Returns:
+        None
+    """
 
     # do_step() returns results of exit_predicate()
     # exit_predicate return True when it's time to quit
