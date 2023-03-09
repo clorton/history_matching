@@ -49,7 +49,8 @@ class Recipe:
     def null_simulator(
         iteration: int, test_points: pd.DataFrame, config: Config
     ) -> pd.DataFrame:
-        """Method description
+        """
+        Null simulator.
 
              ========= ======== ======== === ======== ========== ========== ========== === ==========
              iteration <param0> <param1> ... <paramN> replicate# <feature1> <feature2> ... <featureM>
@@ -63,7 +64,7 @@ class Recipe:
             config: history matching configuration
 
         Returns:
-            pd.DataFrame: simulator results for the given test points in parameter space
+            pd.DataFrame: empty DataFrame of results for the given test points in parameter space
 
         """
 
@@ -86,27 +87,28 @@ class Recipe:
             observations-
 
             ========= ========== ========== === ==========
-            statistic <feature1> <feature2> ... <featureM> 
+            statistic <feature1> <feature2> ... <featureM>
             ========= ========== ========== === ==========
-            mean       float      float     ...  float     
-            variance   float      float     ...  float     
+            mean       float      float     ...  float
+            variance   float      float     ...  float
             ========= ========== ========== === ==========
 
             simulation results-
 
-            ========= ======== ======== === ======== ========== ========== ========== === ========== 
-            iteration <param0> <param1> ... <paramN> replicate# <feature1> <feature2> ... <featureM> 
-            ========= ======== ======== === ======== ========== ========== ========== === ========== 
-            int       float    float    ... float    int        float      float      ... float     
-            ========= ======== ======== === ======== ========== ========== ========== === ========== 
+            ========= ======== ======== === ======== ========== ========== ========== === ==========
+            iteration <param0> <param1> ... <paramN> replicate# <feature1> <feature2> ... <featureM>
+            ========= ======== ======== === ======== ========== ========== ========== === ==========
+            int       float    float    ... float    int        float      float      ... float
+            ========= ======== ======== === ======== ========== ========== ========== === ==========
 
         Args:
             iteration: current iteration index (0 based)
             observations: dataframe with feature names in columns, and one row of target values
-
             simulator_results: dataframe with simulator results for various test points in parameter space
-
             config: history matching configuration
+
+        Returns:
+            List[str]: list of feature names
 
         """
 
@@ -166,7 +168,7 @@ class Recipe:
         emulator_bank: Dict[int, Dict[str, BaseEmulator]],
         config: Config,
     ) -> Tuple[pd.DataFrame, float]:
-        
+
         """
         Args:
             iteration: current iteration index (0 based)

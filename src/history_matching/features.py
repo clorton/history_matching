@@ -457,7 +457,8 @@ def getFeatureStatistics(features: pd.DataFrame, active_statistics: set = None) 
     return featureStatistics
 
 
-def select_features(simulatedFeatures: pd.DataFrame, observedFeatures: pd.DataFrame, featureStatistics: pd.DataFrame, metric: str, iteration: int, history: List = None) -> Tuple[str, Union[int, float, np.number], pd.DataFrame]:
+def select_features(simulatedFeatures: pd.DataFrame, observedFeatures: pd.DataFrame, featureStatistics: pd.DataFrame, metric: str, iteration: int, history: List = None) \
+        -> Tuple[str, Union[int, float, np.number], pd.DataFrame]:
 
     """
       Select target feature for history matching.

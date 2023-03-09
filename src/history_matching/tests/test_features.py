@@ -10,6 +10,7 @@ import history_matching.features as hmf
 
 WORK_DIR = Path(__file__).parent.absolute() / "data"
 
+
 class DerivedFeaturesTests(unittest.TestCase):
 
     """Check that current code generates same features and stats as previous code."""
@@ -32,7 +33,7 @@ class DerivedFeaturesTests(unittest.TestCase):
         # active_features = set(["passthrough"])
         active_statistics = None    # None means use all set([])
 
-        computed_features, computed_stats = hmf.getFeatures( getFeatures_x, getFeatures_xref, active_features, active_statistics )
+        computed_features, computed_stats = hmf.getFeatures(getFeatures_x, getFeatures_xref, active_features, active_statistics)
 
         self.assertEqual(set(computed_features.columns), set(getFeatures_ySim_features))
         for column in computed_features.columns:
@@ -90,13 +91,15 @@ class SelectFeaturesTests(unittest.TestCase):
         select_features_fTarget    = pd.read_hdf(SEL_DIR / "out-fTarget.hdf", "fTarget")                                 # simulation values for selected feature
 
         feature_history = []
-        computed_feature, reference_target, simulated_targets = hmf.select_features(select_features_f, select_features_fref, select_features_fStats, select_features_metric, select_features_iteration, feature_history)
+        computed_feature, reference_target, simulated_targets = \
+            hmf.select_features(select_features_f, select_features_fref, select_features_fStats, select_features_metric, select_features_iteration, feature_history)
 
         self.assertEqual(computed_feature, select_features_feature)
         self.assertEqual(reference_target, select_features_frefTarget)
         self.assertTrue((simulated_targets == select_features_fTarget).all())
 
         return
+
 
 if __name__ == "__main__":
     unittest.main()

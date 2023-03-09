@@ -65,7 +65,7 @@ def grid(
 
 
 def random(parameter_space: pd.DataFrame, n_samples: int = 16) -> pd.DataFrame:
-    
+
     """
     Generate a random sample of points in parameter space.
 

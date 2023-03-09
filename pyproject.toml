@@ -7,6 +7,7 @@ requires = [
 ]
 
 [tool.black]
-line-length = 140
-target-version = ['py37']
+line-length = 200
+target-version = ['py39']
 skip-string-normalization = true
+ignore = ".venv"

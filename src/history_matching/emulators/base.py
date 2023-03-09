@@ -24,10 +24,10 @@ class BaseEmulator:
         Args:
             x : Input data. Pandas dataframe with columns representing parameter
                 values.
-            y : Output data. Pandas dataframe with columns representing 
+            y : Output data. Pandas dataframe with columns representing
                 observations and rows representing samples. Each row in this
-                dataframe must match the corresponding row in `x`. 
-            test_fraction : Fraction of `x` and `y` samples to be used for 
+                dataframe must match the corresponding row in `x`.
+            test_fraction : Fraction of `x` and `y` samples to be used for
                 testing. This is a scalar between 0 and 1.
 
         Returns:
@@ -43,7 +43,7 @@ class BaseEmulator:
         self.y_test = None          # Model output data/observations for testing emulators
         self.y_pred = None          # Array of data predicted by the emulator
         self.y_pred_test = None     # Array of testing data predicted by the emulator
-        self.y_test_pred_df = None  # Testing data predicted by the emulator (dataframe) 
+        self.y_test_pred_df = None  # Testing data predicted by the emulator (dataframe)
 
         # Status flags
         self.training_complete = False

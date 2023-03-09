@@ -44,7 +44,7 @@ def npg(
             emulators_for_iteration = emulator_bank[iteration]
             for feature, emulator in emulators_for_iteration.items():
                 print(f"Testing sample points against emulator for'{feature}' (iteration {iteration})...")
-                plausible_candidates = sample_points.loc[not sample_points['implausible'],:]
+                plausible_candidates = sample_points.loc[not sample_points['implausible'], :]
                 emulated_values = emulator.evaluate(plausible_candidates)
                 # Mean_Estimate = Yglm (from GLM) + Mean (from GPR)
                 # desired_result øtarget from feature selection? (TBD)
@@ -91,14 +91,14 @@ def next_point_generation(
             emulators_for_iteration = emulator_bank[iteration]
             for feature, emulator in emulators_for_iteration.items():
                 print(f"Testing sample points against emulator for'{feature}' (iteration {iteration})...")
-                plausible_candidates = sample_points.loc[not sample_points['implausible'],:]
+                plausible_candidates = sample_points.loc[not sample_points['implausible'], :]
                 emulated_values = emulator.evaluate(plausible_candidates)
                 # Mean_Estimate = Yglm (from GLM) + Mean (from GPR)
                 # desired_result øtarget from feature selection? (TBD)
                 # Var_Predictive (from GPR)
                 # desired_result_var øobservation variance? (TBD)
                 # discrepancy_var ø? (TBD)
-                implausibility = abs( plausible_candidates['Mean_Estimate'] - self.hm_params[cut]['desired_result'] ) / np.sqrt(plausible_candidates['Var_Predictive'] + self.hm_params[cut]['desired_result_var'] + self.hm_params[cut]['discrepancy_var'] )
+                implausibility = abs(plausible_candidates['Mean_Estimate'] - self.hm_params[cut]['desired_result']) / np.sqrt(plausible_candidates['Var_Predictive'] + self.hm_params[cut]['desired_result_var'] + self.hm_params[cut]['discrepancy_var'])
                 # implausibility_threshold - øuser configured?
                 is_implausible = implausibility > self.hm_params[cut]['implausibility_threshold']
                 plausible_candidates['implausible'] = is_implausible
@@ -107,6 +107,7 @@ def next_point_generation(
         break
 
     return
+
 
 """
 def test_plausibility(self, points, constraint = None):
@@ -141,14 +142,15 @@ def test_plausibility(self, points, constraint = None):
         new_candidates['Implausible'] |= plausible_candidates[ 'Implausible_%d_%s'%(it, cut_name) ]
 
     return new_candidates['Implausible']
-""" # pylint:disable=pointless-string-statement
+"""     # pylint:disable=pointless-string-statement
 
-def cut(self, num_desired_candidates = 5000, constraint = None):
+
+def cut(self, num_desired_candidates=5000, constraint=None):
     non_implausible_candidates = pd.DataFrame()
     num_trials = 0
 
-    stats = {k:{'cut_implausible':0, 'newly_implausible':0, 'num':0} for k in self.cuts}
-    stats.update({'num_plausible_candidates':0, 'num_candidates':0, 'num_new_plausible_candidates':0})
+    stats = {k: {'cut_implausible': 0, 'newly_implausible': 0, 'num': 0} for k in self.cuts}
+    stats.update({'num_plausible_candidates': 0, 'num_candidates': 0, 'num_new_plausible_candidates': 0})
 
     while stats['num_plausible_candidates'] < num_desired_candidates:
         # logger.info('-'*80)
@@ -177,12 +179,12 @@ def cut(self, num_desired_candidates = 5000, constraint = None):
         new_candidates = new_candidates.merge(plausibility.to_frame(), left_index=True, right_index=True)
 
         num_trials += new_candidates.shape[0]
-        new_non_implausible_candidates = new_candidates.loc[ new_candidates['Implausible'] == False, :] # candidates that are not implausible
+        new_non_implausible_candidates = new_candidates.loc[new_candidates['Implausible'] is False, :]  # candidates that are not implausible
         non_implausible_candidates = non_implausible_candidates.append(new_non_implausible_candidates)  # append to existing non-implausible candidates
 
-        stats['num_new_plausible_candidates'] = new_non_implausible_candidates.shape[0] # track _new_ non-implausible candidates (are we making progress?)
-        stats['num_plausible_candidates'] = non_implausible_candidates.shape[0]         # track count of non-implausible candidates
-        stats['num_candidates'] += num_trials                                           # track total number of candidates considered
+        stats['num_new_plausible_candidates'] = new_non_implausible_candidates.shape[0]     # track _new_ non-implausible candidates (are we making progress?)
+        stats['num_plausible_candidates'] = non_implausible_candidates.shape[0]             # track count of non-implausible candidates
+        stats['num_candidates'] += num_trials                                               # track total number of candidates considered
 
         del new_candidates
 

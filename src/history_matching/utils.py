@@ -28,10 +28,10 @@ def features_from_observations(observations: pd.DataFrame) -> List[str]:
 
     """
     Return a list of features from a Pandas DataFrame of observations.
-    
+
     Args:
         observations: Pandas DataFrame of observations
-        
+
     Returns:
         List of features
     """

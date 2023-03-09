@@ -66,6 +66,18 @@ To run all the tests run::
 
     tox
 
+To run tests on your current environment run::
+
+    tox -e tests
+
+Other useful tox commands are::
+
+    tox -e clean
+    tox -e docs
+    tox -e check
+    tox -e py39-cover
+    tox -e report
+
 Note, to combine the coverage data from all the tox environments run:
 
 .. list-table::

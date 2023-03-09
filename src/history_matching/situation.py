@@ -198,7 +198,7 @@ class Situation:
     def validate_sample_points(
         sample_points: pd.DataFrame, parameter_space: pd.DataFrame
     ) -> None:
-        
+
         """
         Validate the sample points.
 
@@ -284,7 +284,7 @@ class Situation:
         parameter_space: pd.DataFrame,
         observations: pd.DataFrame,
     ) -> None:
-        
+
         """
         Validate the simulator results.
 
@@ -325,7 +325,7 @@ class Situation:
     def validate_emulator_bank(
         emulator_bank: Dict[int, Dict[str, BaseEmulator]], observations: pd.DataFrame
     ) -> None:
-        
+
         """
         Validate the emulator bank.
 
@@ -430,7 +430,7 @@ class Situation:
 
         Returns:
             Situation object initialized from data in the file
-        
+
         """
 
         af = asdf.open(filename)

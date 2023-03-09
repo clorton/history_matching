@@ -13,6 +13,7 @@ from history_matching import \
     do_step, \
     features_from_observations
 
+
 class RecipeTests(unittest.TestCase):
 
     def test_recipe_order(self):
@@ -61,7 +62,8 @@ class RecipeTests(unittest.TestCase):
 
             return features_from_observations(observations)
 
-        def generate_emulators(iteration: int, selected_features: List[str], observations: pd.DataFrame, simulator_results: pd.DataFrame, generate_emulator_for_feature, config: Config) -> Dict[str, BaseEmulator]:
+        def generate_emulators(iteration: int, selected_features: List[str], observations: pd.DataFrame, simulator_results: pd.DataFrame, generate_emulator_for_feature, config: Config) \
+                -> Dict[str, BaseEmulator]:
 
             messages.append("Generate Emulators")
             self.assertTrue(isinstance(iteration, int))
@@ -74,7 +76,8 @@ class RecipeTests(unittest.TestCase):
 
             return {}
 
-        def next_point_generation(iteration: int, parameter_space: pd.DataFrame, observations: pd.DataFrame, emulator_bank: Dict[int, Dict[str, BaseEmulator]], config: Config) -> Tuple[pd.DataFrame, float]:
+        def next_point_generation(iteration: int, parameter_space: pd.DataFrame, observations: pd.DataFrame, emulator_bank: Dict[int, Dict[str, BaseEmulator]], config: Config) \
+                -> Tuple[pd.DataFrame, float]:
 
             messages.append("Next Point Generation")
             self.assertTrue(isinstance(iteration, int))

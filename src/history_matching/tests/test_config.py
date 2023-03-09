@@ -4,6 +4,7 @@ import unittest
 
 from history_matching.config import Config
 
+
 class ConfigTests(unittest.TestCase):
 
     def test_constructor(self):
