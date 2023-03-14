@@ -8,3 +8,16 @@ from .situation import Situation
 from .recipe import Recipe
 from .step import do_step, do_staircase
 from .utils import mean_and_variance_for_observations, features_from_observations
+
+__all__ = [
+    "Config",
+    "grid_sampler",
+    "latin_hypercube_sampler",
+    "random_sampler",
+    "Situation",
+    "Recipe",
+    "do_step",
+    "do_staircase",
+    "mean_and_variance_for_observations",
+    "features_from_observations",
+]
