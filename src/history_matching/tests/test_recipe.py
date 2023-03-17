@@ -121,7 +121,7 @@ class RecipeTests(unittest.TestCase):
         recipe.exit_predicate              = predicate
 
         situation = Situation(parameter_space, observations, initial_sample_points)
-        config = Config(max_iterations=42, implausibility_threshold=0.125, non_implausible_target=0.95)
+        config = Config(max_iterations=42, candidates_per_iteration=100, implausibility_threshold=0.125, non_implausible_target=0.95)
 
         do_step(situation, recipe, config)
 

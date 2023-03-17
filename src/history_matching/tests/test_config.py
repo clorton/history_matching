@@ -11,6 +11,7 @@ class ConfigTests(unittest.TestCase):
 
         parameters = {
             "max_iterations": 9000,
+            "candidates_per_iteration": 1000,
             "implausibility_threshold": 3.14159265,
             "non_implausible_target": .99997,
             "user_val": 42
