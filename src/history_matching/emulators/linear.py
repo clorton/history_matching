@@ -14,7 +14,8 @@ from history_matching.utils import ndarray_to_dataframe
 class LinearModel(BaseEmulator):
 
     """
-    Emulator based on an ordinary least squares linear regression. The emulator fits a linear regression model to minimize the residual sum of squares between observed targets in the training data and the targets predicted by the linear approximation.
+    Emulator based on an ordinary least squares linear regression.
+    The emulator fits a linear regression model to minimize the residual sum of squares between observed targets in the training data and the targets predicted by the linear approximation.
     """
 
     def __init__(self,
