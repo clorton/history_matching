@@ -1,4 +1,2 @@
-from .base import BaseEmulator
-from .linear import LinearModel
-
-# __all__ = ["BaseEmulator", "LinearModel"]
+from .base import BaseEmulator      # noqa: F401
+from .linear import LinearModel     # noqa: F401
