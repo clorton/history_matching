@@ -39,7 +39,7 @@ class DerivedFeaturesTests(unittest.TestCase):
         for column in computed_features.columns:
             # self.assertTrue((computed_features[column] == getFeatures_ySim_features[column]).all())
             for computed, saved in zip(computed_features[column], getFeatures_ySim_features[column]):
-                self.assertAlmostEqual(computed, saved, delta=saved/1e6)
+                self.assertAlmostEqual(computed, saved, delta=saved / 1e6)
 
         self.assertEqual(set(computed_stats.columns), set(getFeatures_ySim_featureStats))
         for column in computed_stats.columns:
@@ -47,7 +47,7 @@ class DerivedFeaturesTests(unittest.TestCase):
                 test = computed_stats[column][row]
                 expected = getFeatures_ySim_featureStats[column][row]
                 if not (math.isnan(test) and math.isnan(expected)):
-                    self.assertAlmostEqual(test, expected, delta=expected/1e6)
+                    self.assertAlmostEqual(test, expected, delta=expected / 1e6)
 
         return
 

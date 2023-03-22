@@ -11,7 +11,3 @@ line-length = 200
 target-version = ['py39']
 skip-string-normalization = true
 ignore = ".venv"
-
-[tool.flake8]
-max-line-length = 200
-ignore = E201,E203,E221
